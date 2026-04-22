@@ -1,16 +1,16 @@
 # GovBond — Municipal Bond Tokenization Protocol
 
-> Privacy-preserving municipal bond issuance and settlement on Arbitrum Sepolia.
+> Municipal bond issuance and settlement on Initia EVM appchain (govbond-1).
 > Built for Indonesian regional governments (Pemerintah Daerah).
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Solidity](https://img.shields.io/badge/Solidity-0.8.24-blue.svg)](https://soliditylang.org)
-[![Network](https://img.shields.io/badge/Network-Arbitrum%20Sepolia-orange.svg)](https://sepolia.arbiscan.io)
+[![Network](https://img.shields.io/badge/Network-Initia%20EVM-blue.svg)](https://explorer.testnet.initia.xyz)
 [![Hardhat](https://img.shields.io/badge/Built%20with-Hardhat-yellow.svg)](https://hardhat.org)
 
 ## Overview
 
-GovBond tokenizes Indonesian regional government bonds (*obligasi daerah*) on Arbitrum Sepolia, enabling compliant on-chain subscription, coupon distribution, and redemption. The protocol implements ERC-3643 (T-REX) for KYC-gated security tokens and ERC-7540 for asynchronous vault mechanics, giving treasury teams full control over investor eligibility and bond lifecycle.
+GovBond tokenizes Indonesian regional government bonds (*obligasi daerah*) on the Initia EVM appchain (govbond-1), enabling compliant on-chain subscription, coupon distribution, and redemption. The protocol implements ERC-3643 (T-REX) for KYC-gated security tokens and ERC-7540 for asynchronous vault mechanics, giving treasury teams full control over investor eligibility and bond lifecycle.
 
 The system is designed for the Palembang Municipal Bond 2025 (PMB25) as a reference deployment, but the `BondFactory` contract allows any authorized issuer to deploy new bond series without redeploying the core infrastructure.
 
@@ -72,8 +72,8 @@ The system is designed for the Palembang Municipal Bond 2025 (PMB25) as a refere
 ### Prerequisites
 
 - Node.js 18+
-- MetaMask with Arbitrum Sepolia network
-- Arbitrum Sepolia ETH — [faucet](https://faucet.triangleplatform.com/arbitrum/sepolia)
+- MetaMask or Initia-compatible wallet (Keplr/Leap)
+- Initia testnet tokens — [faucet](https://app.testnet.initia.xyz/faucet)
 
 ### Installation
 
@@ -96,14 +96,14 @@ npm run coverage
 ### Deploy
 
 ```bash
-# Deploy core contracts (IDRPToken, IdentityRegistry, ComplianceModule, GovBondToken, GovBondVault)
-npm run deploy
+# Deploy all contracts to Initia EVM appchain
+npm run deploy:initia
 
-# Deploy BondFactory (reads addresses from deployments/arbitrum-sepolia.json)
-npm run deploy:factory
+# Deploy to local node
+npm run deploy:initia-local
 ```
 
-Both scripts write addresses to `deployments/arbitrum-sepolia.json` and `frontend/deployments.json`.
+Both scripts write addresses to `deployments/initia-testnet.json` and `frontend/deployments.json`.
 
 ### Frontend Setup
 
@@ -169,11 +169,13 @@ The vault requires `MINTER_ROLE` on `IDRPToken` to process redemptions. After de
 | Variable | Required | Description |
 |---|---|---|
 | `PRIVATE_KEY` | Yes | Deployer wallet private key (no `0x` prefix) |
-| `ARBISCAN_API_KEY` | No | For contract verification on Arbiscan |
+| `INITIA_RPC_URL` | Yes | RPC URL from `weave init` |
+| `INITIA_CHAIN_ID` | Yes | Chain ID assigned by `weave init` |
+| `INITIA_EXPLORER_URL` | No | Block explorer URL when available |
 
 ## Contract Addresses
 
-See `deployments/arbitrum-sepolia.json` after running the deploy scripts. The file is excluded from git (`.gitignore`) — add addresses to this table after deployment:
+See `deployments/initia-testnet.json` after running the deploy scripts. The file is excluded from git (`.gitignore`) — add addresses to this table after deployment:
 
 | Contract | Address |
 |---|---|
