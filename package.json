@@ -1,0 +1,25 @@
+{
+  "name": "govbond",
+  "version": "1.0.0",
+  "description": "Confidential Municipal Bond Tokenization on Arbitrum Sepolia",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "coverage": "hardhat coverage",
+    "deploy": "hardhat run scripts/deploy.js --network arbitrumSepolia",
+    "deploy:factory": "hardhat run scripts/deployFactory.js --network arbitrumSepolia",
+    "deploy:local": "hardhat run scripts/deploy.js --network localhost",
+    "deploy:initia": "hardhat run scripts/deployInitia.js --network initiaTestnet",
+    "deploy:initia-local": "hardhat run scripts/deployInitia.js --network initiaLocal",
+    "node": "hardhat node",
+    "verify": "hardhat verify --network arbitrumSepolia"
+  },
+  "devDependencies": {
+    "hardhat": "^2.22.0",
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "dotenv": "^16.4.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "project_name": "GovBond — Municipal Bond Tokenization on Initia",
+  "track": "DeFi / Institutional",
+  "vm": "EVM",
+  "chain_id": "govbond-1",
+  "description": "Tokenized Indonesian municipal bonds (obligasi daerah) on Initia EVM appchain. Implements ERC-3643 (T-REX) KYC-gated security tokens and ERC-7540 async vault for compliant bond subscription, coupon distribution, and redemption. Settlement in IDRP (Indonesian Rupiah stablecoin, 2 decimals). Reference deployment: Palembang Municipal Bond 2025 (PMB25).",
+  "native_features": ["interwoven_bridge"],
+  "interwovenkit": true,
+  "github": "https://github.com/xvader/GovBond",
+  "demo_video": "",
+  "deployed_contracts": {
+    "IDRPToken": "",
+    "IdentityRegistry": "",
+    "ComplianceModule": "",
+    "GovBondToken": "",
+    "GovBondVault": "",
+    "BondFactory": ""
+  },
+  "txn_or_deployment_link": "",
+  "team": ["xvader"],
+  "notes": "Port from Arbitrum Sepolia. All contracts unchanged except network config. Frontend updated with InterwovenKit wallet integration and Interwoven Bridge panel."
+}
