@@ -284,7 +284,7 @@ https://app.testnet.initia.xyz/bridge — select **govbond-1** as destination.
 | **L1** | Ethereum Sepolia | Initia (initiation-2) |
 | **Chain ID** | 421614 | govbond-1 (custom) |
 | **Gas token** | ETH | MIN (umin) |
-| **Settlement token** | USDC / mock ERC-20 | IDRP (Indonesian Rupiah, 2 decimals) |
+| **Settlement token** | IDRP (Indonesian Rupiah, 2 decimals) | IDRP (Indonesian Rupiah, 2 decimals) |
 | **KYC / compliance** | On-chain (ERC-3643) | On-chain (ERC-3643) — unchanged |
 | **Vault mechanics** | ERC-7540 async | ERC-7540 async — unchanged |
 | **Wallet support** | MetaMask only | MetaMask + Keplr/Leap (InterwovenKit) |
