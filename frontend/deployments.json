@@ -1,0 +1,13 @@
+{
+  "network": "initiaTestnet",
+  "chainId": 1234,
+  "deployer": "",
+  "IDRPToken": "",
+  "IdentityRegistry": "",
+  "ComplianceModule": "",
+  "GovBondToken": "",
+  "GovBondVault": "",
+  "BondFactory": "",
+  "maturityDate": 0,
+  "deployedAt": ""
+}
