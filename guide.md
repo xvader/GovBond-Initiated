@@ -468,3 +468,40 @@ The vault address is not registered in `IdentityRegistry`. The deploy script han
 ```js
 await registry.registerInvestor(vaultAddress, "ID");
 ```
+
+---
+
+## 16. Arbitrum Sepolia vs Initia EVM — Migration Reference
+
+| | Arbitrum Sepolia | Initia EVM (govbond-1) |
+|---|---|---|
+| **VM** | EVM (Arbitrum Nitro) | EVM (Initia appchain) |
+| **L1** | Ethereum Sepolia | Initia (initiation-2) |
+| **Chain ID** | 421614 | govbond-1 (custom) |
+| **Gas token** | ETH | MIN (umin) |
+| **Settlement token** | USDC / mock ERC-20 | IDRP (Indonesian Rupiah, 2 decimals) |
+| **KYC / compliance** | On-chain (ERC-3643) | On-chain (ERC-3643) — unchanged |
+| **Vault mechanics** | ERC-7540 async | ERC-7540 async — unchanged |
+| **Wallet support** | MetaMask only | MetaMask + Keplr/Leap (InterwovenKit) |
+| **Cross-chain bridge** | Arbitrum bridge (ETH-centric) | Interwoven Bridge (native IBC, govbond-1 ↔ Initia L1) |
+| **Block explorer** | Arbiscan (sepolia.arbiscan.io) | Initia Explorer (explorer.testnet.initia.xyz) |
+| **Faucet** | Arbitrum Sepolia ETH faucet | https://app.testnet.initia.xyz/faucet |
+| **Appchain sovereignty** | Shared sequencer (Arbitrum) | Dedicated appchain — full control over gas, governance, validator set |
+| **Deploy script** | `scripts/deploy.js` | `scripts/deployInitia.js` |
+| **npm script** | `npm run deploy` | `npm run deploy:initia` |
+| **Deployment file** | `deployments/arbitrum-sepolia.json` | `deployments/initia-testnet.json` |
+| **Hardhat network** | `arbitrumSepolia` | `initiaTestnet` / `initiaLocal` |
+| **Env vars** | `PRIVATE_KEY`, `ARBISCAN_API_KEY` | `PRIVATE_KEY`, `INITIA_RPC_URL`, `INITIA_CHAIN_ID` |
+
+### What Changed
+
+- `hardhat.config.js` — added `initiaTestnet` and `initiaLocal` networks; removed Arbiscan etherscan config
+- `scripts/deployInitia.js` — new deploy script (same logic as `deploy.js`, saves to `initia-testnet.json`)
+- `frontend/interwovenkit.js` — new wallet module replacing direct `window.ethereum` calls
+- All three HTML frontends — wallet connection via InterwovenKit, network mismatch banner, Interwoven Bridge panel (index.html), Initia username resolver (index.html)
+- `.env.example` — added `INITIA_RPC_URL`, `INITIA_CHAIN_ID`, `INITIA_EXPLORER_URL`
+- `.initia/submission.json` — hackathon submission file
+
+### What Did NOT Change
+
+All six Solidity contracts (`IDRPToken`, `IdentityRegistry`, `ComplianceModule`, `GovBondToken`, `GovBondVault`, `BondFactory`) are deployed **byte-for-byte identical** to the Arbitrum Sepolia version. No contract logic was modified.

@@ -273,3 +273,30 @@ https://app.testnet.initia.xyz/bridge — select **govbond-1** as destination.
 - [ ] `demo_video` URL added to `.initia/submission.json`
 - [ ] `txn_or_deployment_link` added to `.initia/submission.json`
 - [ ] Submit `.initia/submission.json` on DoraHacks
+
+---
+
+## Arbitrum Sepolia vs Initia EVM — Why We Migrated
+
+| | Arbitrum Sepolia | Initia EVM (govbond-1) |
+|---|---|---|
+| **VM** | EVM (Arbitrum Nitro) | EVM (Initia appchain) |
+| **L1** | Ethereum Sepolia | Initia (initiation-2) |
+| **Chain ID** | 421614 | govbond-1 (custom) |
+| **Gas token** | ETH | MIN (umin) |
+| **Settlement token** | USDC / mock ERC-20 | IDRP (Indonesian Rupiah, 2 decimals) |
+| **KYC / compliance** | On-chain (ERC-3643) | On-chain (ERC-3643) — unchanged |
+| **Vault mechanics** | ERC-7540 async | ERC-7540 async — unchanged |
+| **Wallet support** | MetaMask only | MetaMask + Keplr/Leap (InterwovenKit) |
+| **Cross-chain bridge** | Arbitrum bridge (ETH-centric) | Interwoven Bridge (native IBC, govbond-1 ↔ Initia L1) |
+| **Block explorer** | Arbiscan | Initia Explorer (explorer.testnet.initia.xyz) |
+| **Faucet** | Arbitrum Sepolia ETH faucet | https://app.testnet.initia.xyz/faucet |
+| **Appchain sovereignty** | Shared sequencer (Arbitrum) | Dedicated appchain — full control over gas, governance, and validator set |
+| **Hackathon track** | — | DoraHacks INITIATE — DeFi/Institutional |
+
+### Key Reasons for Migration
+
+- **Appchain sovereignty** — govbond-1 is a dedicated EVM rollup on Initia, giving the issuer full control over transaction ordering, gas pricing, and upgrade governance. On Arbitrum Sepolia, GovBond shared infrastructure with all other Arbitrum contracts.
+- **Native IDRP settlement** — Initia's Interwoven Bridge enables IDRP to move natively between Initia L1 and the govbond-1 appchain via IBC, without wrapping or third-party bridges.
+- **Interoperable wallets** — InterwovenKit unifies Cosmos-native wallets (Keplr, Leap) and EVM wallets (MetaMask) under a single connection flow, matching the dual-audience nature of Indonesian institutional DeFi.
+- **Zero contract changes** — All six Solidity contracts are deployed byte-for-byte identical. Only the Hardhat network config and frontend wallet layer changed, proving EVM portability.
